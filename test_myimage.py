@@ -29,7 +29,7 @@ class Case:
             f'masks: {self.maskfiles}, avg: {self.maskaverages}, masked: {self.masked}'
 
 
-casefile = "tests.csv"
+casefile = "https://waqarsaleem.github.io/tests.csv"
 cases = []
 
 
@@ -41,7 +41,8 @@ def local_or_remote_path(row, idx, prefix, suffix):
     return prefix + f + suffix
 
 
-with open(casefile) as csv_file:
+with urlopen(casefile) as csv_file:
+    csv_file = csv_file.read().decode('utf-8').strip()
     csv_reader = csv.reader(csv_file, delimiter=',')
     next(csv_reader)
     for row in csv_reader:
