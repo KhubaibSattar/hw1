@@ -213,9 +213,9 @@ Another application we use in an implementation of \textit{Canny Edge Detection}
 
 We treat an image as a grid of \textit{pixels} where each pixel has an RGB value indicating the red, green, and blue intensities of the pixel. An image has \textit{dimensions}, namely \textit{width} and \textit{height}, which determine the number of \textit{rows} and \textit{columns} in the image. Every pixel in the image is at a unique combination of row and column numbers which can therefore be used as coordinate system in the image. An image with width $w$ and height $h$ is said to be of size $w\times h$. Figure \ref{fig:img-dim} shows the column and row numbers in a $w\times h$ image along with the resulting pixel coordinates. Note that the coordinate is just a means to locate a pixel in the image, it is not the value stored at the pixel. The value stored at a pixel a triplet denoting the red, green, and blue intensities respectively.
 
-We will work with a \textit{flattened}representation of an image. That is, we will store the pixel values in a 1-dimensional list structure as opposed to 2-dimensional structure. The list stores pixel values as they appear in the image from left to right and top to bottom. Figure \ref{fig:img-rgb} shows a $5\times 5$ image with some supposed RGB values. Note that each value would be a triplet of integers, each integer between 0 and 255 inclusive. Using our representation, the image in Figure \ref{fig:img-rgb} will be represented as the list:
+We will work with a \textit{flattened} representation of an image. That is, we will store the pixel values in a 1-dimensional list structure as opposed to 2-dimensional structure. The list stores pixel values as they appear in the image from left to right and top to bottom. Figure \ref{fig:img-rgb} shows a $5\times 5$ image with some supposed RGB values. Note that each value would be a triplet of integers, each integer between 0 and 255 inclusive. Using our representation, the image in Figure \ref{fig:img-rgb} will be represented as the list:
 \[
-  [a, b, c, d, e, f, g, h, i, j, k, l, , m, n, o, p, q, r, s, t, u, v, w, x, y]
+  [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y]
 \]
 
 \begin{figure}
@@ -257,7 +257,7 @@ You have to implement the image operations shown in Listing \ref{lst:imgops} on 
 
 \subsection{Image}
 
-We implement our custom image type as \texttt{MyImage} as shown in Listing \ref{lst:img} on Page \pageref{lst:img} and also included in the accompanying file \texttt{myimage.py}. Note that the implementation uses on \texttt{MyList} which is our implementation of the list. The given implementation is complete and you are not to change it except for the indicated line in \texttt{MyImage.\_\_init\_\_()}. You will change this line to use your implementation of \texttt{MyList}. This is the only change you are allowed to make in the implementation of \texttt{MyImage}.
+We implement our custom image type as \texttt{MyImage} as shown in Listing \ref{lst:img} on Page \pageref{lst:img} and also included in the accompanying file \texttt{myimage.py}. Note that the implementation uses \texttt{MyList} which is our implementation of the list. The given implementation is complete and you are not to change it except for the indicated line in \texttt{MyImage.\_\_init\_\_()}. You will change this line to use your implementation of \texttt{MyList}. This is the only change you are allowed to make in the implementation of \texttt{MyImage}.
 
 \subsection{List}
 
@@ -288,7 +288,7 @@ This homework is adapted from Homework 3 of the Fall 2014 offering of 15-122: Pr
 
 \newpage
 \section{\texttt{MyList}}
-\lstinputlisting[language=python, frame=single, caption=List Type, label={lst:lst}]{src/myimage.py}
+\lstinputlisting[language=python, frame=single, caption=List Type, label={lst:lst}]{src/mylist.py}
 
 \newpage
 \section{Pointers in python}
