@@ -5,19 +5,24 @@ class MyImage:
     """ Holds a flattened RGB image and its dimensions.
     """
 
-    def __init__(self, size: (int, int)) -> None:
+    def __init__(self, size: (int, int), pointer=False) -> None:
         """Initializes a black image of the given size.
 
         Args:
         - size: (width, height) specifies the dimensions to create.
+        - pointer: is the backing list pointer- (True) or array- (False) based.
 
         Returns:
         none
         """
         # Save size, create a list of the desired size with black pixels.
         width, height = self.size = size
-        self.pixels: MyList = MyList(width * height, value=(0, 0, 0))
-        # ^ CHANGE this line to use your implementation of MyList.
+        if pointer:
+            self.pixels: PointerList = PointerList(width * height,
+                                                   value=(0, 0, 0))
+        else:
+            self.pixels: ArrayList = ArrayList(width * height,
+                                               value=(0, 0, 0))
 
     def _get_index(self, r: int, c: int) -> int:
         """Returns the list index for the given row, column coordinates.
