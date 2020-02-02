@@ -1,16 +1,10 @@
-import csv
-
-from List import *
+from image_operations import *
 from PIL import Image
 from urllib.request import urlopen
 
-images = urlopen("https://waqarsaleem.github.io/img.txt").readlines()
-images = [img.decode('utf-8').strip() for img in images]
-
-img1 = MyImage.open(
-    urlopen('https://cdn.sstatic.net/Sites/stackoverflow/img/logo.png'))
-img2 = MyImage.open(
-    urlopen('https://cdn.sstatic.net/Sites/stackoverflow/img/logo.png'))
+casefile = "https://waqarsaleem.github.io/cs201/hw1/tests.csv"
+OUTPUT_IMAGE = 'tmp-output.png'
+OUTPUT_MASK = 'tmp-mask.txt'
 
 
 class Case:
@@ -29,73 +23,123 @@ class Case:
             f'masks: {self.maskfiles}, avg: {self.maskaverages}, masked: {self.masked}'
 
 
-casefile = "https://waqarsaleem.github.io/tests.csv"
-cases = []
-
-
-def local_or_remote_path(row, idx, prefix, suffix):
-    if idx >= len(row) or not (f := row[idx]):
-        return
-    if f.startswith('https://'):
-        return f
-    return prefix + f + suffix
-
-
-with urlopen(casefile) as csv_file:
-    csv_file = csv_file.read().decode('utf-8').strip()
-    csv_reader = csv.reader(csv_file, delimiter=',')
-    next(csv_reader)
-    for row in csv_reader:
-        if not (row := list(map(str.strip, row))):
+def fetch_testcases(path):
+    testcases = []
+    csv_lines = [line.decode('utf-8').strip()
+                 for line in urlopen(path).readlines()[1:]]
+    for row in csv_lines:
+        if not row:
             continue
+        row = row.split(',')
         case = Case()
-        case.source = local_or_remote_path(row, 0, 'images/', '.png')
-        case.rotated = local_or_remote_path(row, 1, 'images/', '.png')
-        case.suppress = [(f := row[i]) == '1' for i in range(2, 5)
-                         if i < len(row)]
-        case.suppressed = local_or_remote_path(row, 5, 'images/', '.png')
-        if (maskfiles := local_or_remote_path(row, 6, '', '')):
-            maskfiles = maskfiles.split(':')
-            case.maskfiles = [f if f.startswith('https://')
-                              else 'masks/mask-'+f+'.txt' for f in maskfiles]
+        case.source = row[0]
+        if len(row) > 1:
+            case.rotated = row[1]
+        if len(row) > 5:
+            case.suppressed = row[5]
+            case.suppress = [f == '1' for f in row[2:5]]
+        if len(row) > 8:
+            case.masked = row[8]
+            case.maskfiles = row[6].split('::')
             case.maskaverages = [a == '1' for a in row[7].split(':')]
-            case.masked = local_or_remote_path(row, 8, 'images/', '.png')
-        cases.append(case)
-
-outputfile = 'output.png'
+        testcases.append(case)
+    return testcases
 
 
-def test_rotation():
+cases = fetch_testcases(casefile)
+
+
+def test_array_rotation():
     for case in cases:
-        if case.rotated:
-            rotations(MyImage.open(case.source)).save(outputfile)
-            assert Image.open(outputfile) == Image.open(case.rotated),\
-                f'rotation of {case.source} does not match reference'\
-                f'{case.rotated}'
+        if not case.rotated:
+            continue
+        source = urlopen(case.source)
+        rotations(MyImage.open(source)).save(OUTPUT_IMAGE)
+        rotated = urlopen(case.rotated)
+        assert Image.open(OUTPUT_IMAGE) == Image.open(rotated),\
+            f'rotation of {case.source} does not match reference'\
+            f'{case.rotated}'
 
 
-def test_suppression():
+def test_array_suppression():
     for case in cases:
-        if case.suppressed:
-            sp = case.suppress
-            remove_channel(MyImage.open(case.source),
-                           red=sp[0], green=sp[1], blue=sp[2]).save(outputfile)
-            assert Image.open(outputfile) == Image.open(case.suppressed),\
-                f'suppression of {case.source} does not match reference'\
-                f'{case.suppressed} under channels {case.suppress}'
+        if not case.suppressed:
+            continue
+        sp = case.suppress
+        source = urlopen(case.source)
+        remove_channel(MyImage.open(source),
+                       red=sp[0], green=sp[1], blue=sp[2]).save(OUTPUT_IMAGE)
+        suppressed = urlopen(case.suppressed)
+        assert Image.open(OUTPUT_IMAGE) == Image.open(suppressed),\
+            f'suppression of {case.source} does not match reference'\
+            f'{case.suppressed} under channels {case.suppress}'
 
 
-def test_mask():
+def test_array_mask():
     for case in cases:
-        if case.masked:
-            avgs = case.maskaverages
-            files = case.maskfiles
-            dst = apply_mask(MyImage.open(case.source),
-                             files[0], average=avgs[0])
-            for mask, avg in zip(files[1:], avgs[1:]):
-                dst = apply_mask(dst, mask, average=avg)
-            dst.save(outputfile)
-            assert Image.open(outputfile) == Image.open(case.masked),\
-                f'masking of {case.source} does not match reference '\
-                f'{case.masked}\nunder masks {case.maskfiles}'\
-                f' and averages {case.maskaverages}'
+        if not case.masked:
+            continue
+        avgs = case.maskaverages
+        # masks = [urlopen(path) for path in case.maskfiles]
+        open(OUTPUT_MASK, 'w').write(
+            urlopen(case.maskfiles[0]).read().decode('utf-8'))
+        source = urlopen(case.source)
+        dst = apply_mask(MyImage.open(source),
+                         OUTPUT_MASK, average=case.maskaverages[0])
+        for mask, avg in zip(case.maskfiles[1:], case.maskaverages[1:]):
+            open(OUTPUT_MASK, 'w').write(urlopen(mask).read().decode('utf-8'))
+            dst = apply_mask(dst, OUTPUT_MASK, average=avg)
+        dst.save(OUTPUT_IMAGE)
+        masked = urlopen(case.masked)
+        assert Image.open(OUTPUT_IMAGE) == Image.open(masked),\
+            f'masking of {case.source} does not match reference '\
+            f'{case.masked}\nunder masks {case.maskfiles} '\
+            f'and averages {case.maskaverages}'
+
+
+def test_pointer_rotation():
+    for case in cases:
+        if not case.rotated:
+            continue
+        source = urlopen(case.source)
+        rotations(MyImage.open(source, pointer=True)).save(OUTPUT_IMAGE)
+        rotated = urlopen(case.rotated)
+        assert Image.open(OUTPUT_IMAGE) == Image.open(rotated),\
+            f'rotation of {case.source} does not match reference'\
+            f'{case.rotated}'
+
+
+def test_pointer_suppression():
+    for case in cases:
+        if not case.suppressed:
+            continue
+        sp = case.suppress
+        source = urlopen(case.source)
+        remove_channel(MyImage.open(source, pointer=True),
+                       red=sp[0], green=sp[1], blue=sp[2]).save(OUTPUT_IMAGE)
+        suppressed = urlopen(case.suppressed)
+        assert Image.open(OUTPUT_IMAGE) == Image.open(suppressed),\
+            f'suppression of {case.source} does not match reference'\
+            f'{case.suppressed} under channels {case.suppress}'
+
+
+def test_pointer_mask():
+    for case in cases:
+        if not case.masked:
+            continue
+        avgs = case.maskaverages
+        # masks = [urlopen(path) for path in case.maskfiles]
+        open(OUTPUT_MASK, 'w').write(
+            urlopen(case.maskfiles[0]).read().decode('utf-8'))
+        source = urlopen(case.source)
+        dst = apply_mask(MyImage.open(source, pointer=True),
+                         OUTPUT_MASK, average=case.maskaverages[0])
+        for mask, avg in zip(case.maskfiles[1:], case.maskaverages[1:]):
+            open(OUTPUT_MASK, 'w').write(urlopen(mask).read().decode('utf-8'))
+            dst = apply_mask(dst, OUTPUT_MASK, average=avg)
+        dst.save(OUTPUT_IMAGE)
+        masked = urlopen(case.masked)
+        assert Image.open(OUTPUT_IMAGE) == Image.open(masked),\
+            f'masking of {case.source} does not match reference '\
+            f'{case.masked}\nunder masks {case.maskfiles} '\
+            f'and averages {case.maskaverages}'
