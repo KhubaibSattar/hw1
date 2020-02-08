@@ -108,9 +108,9 @@ Given a square image, i.e. one whose width is equal to its height, this operatio
 
 \subsection{Applying a Mask}
 
-A mask specifies certain \textit{weights} and applying the mask to an image entails replacing the value of each pixel in the image with a \textit{weighted average} of the values of its \textit{neighbors}. The weights and the neighbors to consider for the average are specified by the mask.
+A mask specifies certain \textit{weights} and applying the mask to an image entails replacing the value of each pixel in the image with a \textit{weighted sum} or \textit{weighted average} of the values of its \textit{neighbors}. The weights and the neighbors to consider for the average are specified by the mask.
 
-The  mask is an $n \times n$ array of non-negative integers representing weights. For our purposes, $n$ must be odd. This means that the $n \times n$ array has a well defined center--the \textit{origin}. The weights in the mask can be arbitrary integers--positive, negative, or zero.
+The  mask is an $n \times n$ array of integers representing weights. For our purposes, $n$ must be odd. This means that the $n \times n$ array has a well defined center--the \textit{origin}. The weights in the mask can be arbitrary integers--positive, negative, or zero.
 
 For each pixel in the input image, think of the mask as being placed on top of the image so its origin is on the pixel we wish to examine. The intensity value of each pixel under the mask is multiplied by the corresponding value in the mask that covers it. These products are added together. Always use the original values for each pixel for each mask calculation, not the new values you compute as you process the image.
 
@@ -134,11 +134,11 @@ Some masks require a \textit{weighted average} instead of a weighted sum. The we
 \]
 Instead of doing this calculation for each channel individually, use the average value of the red, green, and blue channels. For example, if the pixel is given by $(r, g, b) = (107, 9, 218)$, then use $(107 + 9 + 218)//3 = 111$ for each channel. This effectively converts the image to grayscale.
 
-Note that sometimes when you center the mask over a pixel you want to operate on, the mask will hang over the edge of the image. In this case, compute the weighted sum of only those pixels the mask covers. For the example shown in Figure \ref{fig:mask-hang}, the result for the pixel $e$ is given by:
+Note that sometimes when you center the mask over a pixel you want to operate on, the mask will hang over the edge of the image. In this case, compute the weighted sum of only those pixels the mask covers. For the example shown in Figure \ref{fig:mask-hang}, the weighted sum for the pixel $e$ is given by:
 \[
   3b + c + 5e + 3f + 3h + i
 \]
-If no average is required and the following if an average is required:
+and the weighted average is as follows. Integer division is used to ensure that pixel intensities are integers.
 \[
   \frac{3b + c + 5e + 3f + 3h + i}{3+1+5+3+3+1}
 \]
