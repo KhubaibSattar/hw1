@@ -11,8 +11,8 @@ For this assignment, you should
 - be comfortable with programming in a high level language, preferably python
 - be comfortable with object oriented programming
 - be able to read and understand technical documentation
-- know that a color image is usually stored in RGB fornmat
-- be able to problem solve
+- know that a color image is usually stored in RGB format
+- be able to solve problems
 
 ## The Problem Set
 
