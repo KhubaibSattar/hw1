@@ -1,4 +1,4 @@
-# Homework 1
+# Homework 1: List Implementations
 # [CS 201 Data Structures II, Spring 2021](https://hulms.instructure.com/courses/1260)
 -----
 
