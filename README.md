@@ -3,12 +3,12 @@
 
 ## Purpose
 
-This homework introduces the idea of using different implementations for the same interface and the resulting impact on running time. The interface in this case is a list and the implementations are array and pointer based. The implemented list is used for image operations.
+This homework introduces the idea of using different implementations for the same interface and the resulting impact on running time. The interface in this case is a _List_ and the implementations are array and pointer based. The implemented List is used for image operations.
 
 ## Background
 
 For this assignment, you should
-- be comfortable with programming in a high level language, preferably python
+- be comfortable with programming in a high level language, preferably python 3
 - be comfortable with object oriented programming
 - be able to read and understand technical documentation
 - know that a color image is usually stored in RGB format
@@ -18,10 +18,11 @@ For this assignment, you should
 
 The problems are in `hw1.tex` which is to be compiled using a LaTeX compiler.
 
-## Time Requirement.
+## Time Requirement
 
 Based on feedback from the last set of students that attempted this assignment, the number of hours that your team will require to complete this homework are as follows.
-- _data unavailable_
+- (min, max) : (4.5, 45)
+- (mean, median, st. dev.) : (17.1, 15, 12.4)
 
 ## Grading
 
