@@ -39,13 +39,13 @@ Deadline: 1830h on Fri, 7 Feb
 
 ### 1.2 Feedback
 
-You have to provide feedback on your team and on the assignment by filling the form at [LMS -> Tests & Quizzes](https://lms.habib.edu.pk/x/jliIIV). This is due around the same time as the problem solutions.
+You have to provide feedback on your team and on the assignment by filling the form at [LMS -> Tests & Quizzes](https://hulms.instructure.com/courses/1260). This is due around the same time as the problem solutions.
 
 Deadline: 1845h on Fri, 7 Feb
 
 ### 1.3 Peer Review
 
-You will review 2 submissions which will be shared with you through [LMS -> Drop Box](https://lms.habib.edu.pk/x/4MonbN). The review will be according to the accompanying _rubric.csv_ and will be submitted through [LMS -> Assignments](https://lms.habib.edu.pk/x/x0KvOt).
+You will review 2 submissions which will be shared with you through [LMS -> Drop Box](https://hulms.instructure.com/courses/1260). The review will be according to the accompanying _rubric.csv_ and will be submitted through [LMS -> Assignments](https://hulms.instructure.com/courses/1260).
 
 Deadline: 1830h on Mon, 10 Feb
 
@@ -56,3 +56,4 @@ Please use the following avenues:
 - the [class forum](https://habibedu.workplace.com/groups/145941763811786/)
 - discuss with your peers
 - talk to course staff in their desginated hours
+- Consult the TAs in their office hours
