@@ -1,17 +1,20 @@
-Correctness - checked by Travis,Weight,All tests fail,Some tests fail/pass,All tests pass,,
-Suppression Tests Pass for Array Based Images,5,0,1,2,,
-Rotation Tests Pass for Array Based Images,10,0,1,2,,
-Masking Tests Pass for Array Based Images,15,0,1,2,,
-Suppression Tests Pass for Pointer Based Images,5,0,1,2,,
-Rotation Tests Pass for Pointer Based Images,10,0,1,2,,
-Masking Tests Pass for Pointer Based Images,15,0,1,2,,
-,,,,,,
-Implementation - checked by instructor,Weight,Implementation is incorrect,Implementation is largely incorrect,Implementation is largely correct,Implementation is correct,
-Array List is correctly implemented, as checked manually,20,0,1,2,3,
-Pointer List is correctly implemented, as checked manually,30,0,1,2,3,
-,,,,,,
-Style - peer review,Weight,,,,,
-,,I cannot find anything good to say,There are many issues.,There are some issues.,Everything is fine. I cannot find any faults.,This is perfection embodied
-Code is well documented and readable,15,1,2,3,4,5
-,,The approaches seem inefficient overall,The approaches seem largely ineffificent.,The approaches are largely efficient with some room improvement.,Everything is fine. I cannot find any faults.,The solutions are exceptionally well done
-The problems are solved well,10,1,2,3,4,5
+Correctness - checked by Travis,Weight,Most tests fail,More than 75% of the tests pass,
+Suppression Tests Pass for Array Based Images,5,0,1,
+Rotation Tests Pass for Array Based Images,10,0,1,
+Masking Tests Pass for Array Based Images,15,0,1,
+Suppression Tests Pass for Pointer Based Images,5,0,1,
+Rotation Tests Pass for Pointer Based Images,10,0,1,
+Masking Tests Pass for Pointer Based Images,15,0,1,
+,,,,
+Implementation - checked by instructor,Weight,Implementation is incorrect or has many errors,Implementation is correct or has fewm minor errors,
+Array List is correctly implemented,20,0,1,
+Pointer List is correctly implemented,30,0,1,
+,,Additional features are not added or I do not find them cool.,Additional features are added and I find them cool.,
+Cool Image Operations,10 (bonus),0,1,
+,,,,
+,,,,
+Style - peer review,Weight,,,
+,,There are many issues,There are no or very few minor issues,There are no issues AND there are additional things to like.
+Code is well documented and readable,15,0,1,1.05
+,,The approaches seems largely inefficient.,The approaches are largely efficient.,The approaches have no possible room for improvement.
+The problems are solved well,10,0,1,1.05
