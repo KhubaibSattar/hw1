@@ -13,7 +13,7 @@
 \pagestyle{headandfoot}
 \runningheadrule
 \runningfootrule
-\runningheader{CS 201 Data Structures II}{Homework 1: Lists}{Spring 2020}
+\runningheader{CS 201 Data Structures II}{Homework 1: Lists}{Spring 2021}
 \runningfooter{}{Page \thepage\ of \numpages}{}
 \firstpageheader{}{}{}
 
@@ -53,9 +53,9 @@
 \lstset{style=mystyle}
 
 \title{Homework 1: Lists}
-\author{CS 201 Data Structures II\\Habib University\\Spring 2020}
+\author{CS 201 Data Structures II\\Habib University\\Spring 2021}
 % \date{\numpoints\ points, Due: 18h on Wednesday, 11 September}
-\date{Due: 18h on Friday, 7 February}
+\date{Due: 1630h on Friday, 12 February}
 
 \begin{document}
 \maketitle
@@ -257,25 +257,30 @@ You have to implement the image operations shown in Listing \ref{lst:imgops} on 
 
 \subsection{Image}
 
-We implement our custom image type as \texttt{MyImage} as shown in Listing \ref{lst:img} on Page \pageref{lst:img} and also included in the accompanying file \texttt{myimage.py}. Note that the implementation uses \texttt{MyList} which is our implementation of the list. The given implementation is complete and you are not to change it except for the indicated line in \texttt{MyImage.\_\_init\_\_()}. You will change this line to use your implementation of \texttt{MyList}. This is the only change you are allowed to make in the implementation of \texttt{MyImage}.
+We implement our custom image type as \texttt{MyImage} as shown in Listing \ref{lst:img} on Page \pageref{lst:img} and also included in the accompanying file \texttt{myimage.py}. Note that the implementation uses \texttt{MyList} which is our implementation of the list. The given implementation is complete and you are not to change it.
 
 \subsection{List}
 
-We implement our custom list as \texttt{MyList} whose interface shown in Listing \ref{lst:lst} on Page \pageref{lst:lst} and also included in the accompanying file \texttt{mylist.py}. Note that the implementation is mostly complete except for the segments marked as \texttt{pass}. The implementation includes a mechanism to allow iteration over the list and using some other native python syntax with it.
+We implement our custom list as \texttt{MyList} whose interface shown in Listing \ref{lst:lst} on Page \pageref{lst:lst} and also included in the accompanying file \texttt{mylist.py}. Note that the implementation is mostly complete except for the segments marked as \texttt{pass}. The implementation includes a mechanism to allow iteration over the list and using some other native python syntax with it. Go over the \texttt{MyList} implementation thoroughly in order to understand what follows.
 
-You have to copy the implementation to \texttt{ArrayList} and \textsf{PointerList} which will implement the list using \href{https://www.programiz.com/python-programming/array}{python arrays} and pointers respectively. See the implementation of BST in Listing \ref{lst:bst} on Page \pageref{lst:bst} and also included in the accompanying file \texttt{bst.py} to understand pointers in python. You then have to modify the required line in \texttt{myimage}.py to use your type.
+In the same file, you have to create two new classes -  \texttt{ArrayList} and \textsf{PointerList} - by copying the implementation of \texttt{MyList}. The \texttt{ArrayList} class will implement the list using \href{https://www.programiz.com/python-programming/array}{python arrays} and the \textsf{PointerList} class will implement it based on nodes. See the implementation of BST in Listing \ref{lst:bst} on Page \pageref{lst:bst} and also included in the accompanying file \texttt{bst.py} to understand nodes in python. 
+
+Finally, you have to modify the required line in \texttt{myimage}.py to use your type.
+
+\section{Testing}
+We will be using the continuous integration tool, \texttt{Travis CI}, to test your implementation of image operations. A tutorial will be conducted by your TA's on the matter. Stay tuned for  more details.
 
 \section{Timing}
 
-We want to perform a timing analysis on the execution of the image operations using our list implementations. Those details are forthcoming.
+Be mindful of the difference in execution time of image operations between \texttt{ArrayList} and \textsf{PointerList}. Can you account for those differences? [you are not required to submit anything for this]
 
 \section{Bonus}
 
-You can earn bonus marks for implementing interesting image manipulation algorithms of your own. Please see the rubric for more details. Interesting submissions will be featured on the course's forthcoming web page.
+You can earn bonus marks for implementing some interesting image manipulation algorithm of your own in a new file  \textsf{bonus.py}. Please see the rubric for more details. Interesting submissions will be featured on the course's web page.
 
 \section{Credits}
 
-This homework is adapted from Homework 3 of the Fall 2014 offering of 15-122: Principles of Imperative Computation at Carnegie Mellon University (CMU). Credit is due to \href{https://www.facebook.com/abdullah.zafar.547389}{Abdullah Zafar} for identifying it.
+This homework is adapted from Homework 3 of the Fall 2014 offering of 15-122: Principles of Imperative Computation at Carnegie Mellon University (CMU).
 
 \newpage
 \appendix
