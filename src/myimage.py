@@ -10,7 +10,7 @@ class MyImage:
 
         Args:
         - size: (width, height) specifies the dimensions to create.
-        - pointer: is the backing list pointer- (True) or array- (False) based.
+        - pointer: if True then the backing list is pointer-based else array-based.
 
         Returns:
         none

@@ -28,7 +28,7 @@ class MyList:
         The list is static. It only has space for size elements.
 
         Args:
-        - size: size of the list; space is reserved for these many elements. 
+        - size: size of the list; space is reserved for these many elements.
         - value: the optional initial value of the created elements.
 
         Returns:
