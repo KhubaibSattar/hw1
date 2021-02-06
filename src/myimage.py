@@ -1,5 +1,7 @@
 from PIL import Image
 
+from mylist import ArrayList, PointerList
+
 
 class MyImage:
     """ Holds a flattened RGB image and its dimensions.
@@ -43,7 +45,7 @@ class MyImage:
             f"(r, c): ({r}, {c}) for image of size: {self.size}"
         return r*width + c
 
-    def open(path: str) -> MyImage:
+    def open(self, path: str, pointer=False) -> 'MyImage':
         """Creates and returns an image containing from the information at file path.
 
         The image format is inferred from the file name. The read image is
@@ -51,16 +53,17 @@ class MyImage:
 
         Args:
         - path: path to the file containing image information
+        - pointer: if True then the backing list is pointer-based, else array-based.
 
         Returns:
         the image created using the information from file path.
         """
         # Use PIL to read the image information and store it in our instance.
-        img: PIL.Image = Image.open(path)
-        myimg: MyImage = MyImage(img.size)
+        img: Image = Image.open(path)
+        myimg: MyImage = MyImage(img.size, pointer)
         width, height = img.size
         # Covert image to RGB. https://stackoverflow.com/a/11064935/1382487
-        img: PIL.Image = img.convert('RGB')
+        img: Image = img.convert('RGB')
         # Get list of pixel values (https://stackoverflow.com/a/1109747/1382487),
         # copy to our instance and return it.
         for i, rgb in enumerate(list(img.getdata())):
@@ -79,7 +82,7 @@ class MyImage:
         none
         """
         # Use PIL to write the image.
-        img: PIL.Image = Image.new("RGB", self.size)
+        img: Image = Image.new("RGB", self.size)
         img.putdata([rgb for rgb in self.pixels])
         img.save(path)
 
@@ -117,6 +120,6 @@ class MyImage:
         none
         """
         # Use PIL to display the image.
-        img: PIL.Image = Image.new("RGB", self.size)
+        img: Image = Image.new("RGB", self.size)
         img.putdata([rgb for rgb in self.pixels])
         img.show()

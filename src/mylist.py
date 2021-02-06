@@ -78,7 +78,7 @@ class MyList:
         '''
         # Ensure bounds.
         assert 0 <= i < len(self),\
-            f'Setting invalid list index {i} in list of size {self.size()}'
+            f'Setting invalid list index {i} in list of size {len(self)}'
         pass
 
     def __iter__(self) -> MyListIterator:
@@ -119,3 +119,11 @@ class MyList:
         none
         '''
         self[i] = value
+
+
+class ArrayList(MyList):
+    pass
+
+
+class PointerList(MyList):
+    pass
